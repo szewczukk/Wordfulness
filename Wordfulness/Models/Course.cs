@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace Wordfulness.Models
@@ -9,5 +9,7 @@ namespace Wordfulness.Models
 
         [MinLength(1)]
         public string Name { get; set; }
+
+        public virtual Collection<User> Users { get; set; }
     }
 }

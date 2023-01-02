@@ -4,7 +4,7 @@ using Wordfulness.Models;
 
 namespace Wordfulness.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public DbSet<Course> Courses { get; set; }
 
