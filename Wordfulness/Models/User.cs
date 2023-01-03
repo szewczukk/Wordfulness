@@ -3,8 +3,8 @@ using System.Collections.ObjectModel;
 
 namespace Wordfulness.Models
 {
-    public class User : IdentityUser
-    {
-        public virtual Collection<Course> Courses { get; set; }
-    }
+	public class User : IdentityUser
+	{
+		public virtual Collection<Course> Courses { get; set; }
+	}
 }

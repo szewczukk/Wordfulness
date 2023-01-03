@@ -15,4 +15,12 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.11" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EditorConfigFiles Remove="C:\Users\Dmitro\Desktop\Wordfulness\Wordfulness\.editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="C:\Users\Dmitro\Desktop\Wordfulness\Wordfulness\.editorconfig" />
+  </ItemGroup>
+
 </Project>
