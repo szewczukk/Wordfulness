@@ -5,7 +5,11 @@
 
 <ul>
     @foreach (var course in Model.Courses)
-    {
-        <li>@course.Name</li>
+    { 
+        <li>
+            <a asp-action="Details" asp-route-id="@course.Id">
+                @course.Name
+            </a>
+        </li>
     }
 </ul>
