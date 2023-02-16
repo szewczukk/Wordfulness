@@ -1,0 +1,10 @@
+﻿@model Wordfulness.Models.Course
+@{
+    ViewData["Title"] = "Details Page";
+}
+
+Are you sure you want to delete @Html.DisplayFor(model => model.Name)?
+<form asp-action="Delete">
+    <input type="hidden" asp-for="Id"/>
+    <input type="submit" value="Delete" />
+</form>
