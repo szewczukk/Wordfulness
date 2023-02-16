@@ -6,11 +6,11 @@ namespace Wordfulness.Data
 {
 	public class ApplicationDbContext : IdentityDbContext<User>
 	{
-		public DbSet<Course> Courses { get; set; }
-
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
 			: base(options)
 		{
 		}
+
+		public DbSet<Course> Courses { get; set; }
 	}
 }

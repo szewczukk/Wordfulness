@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System.Diagnostics;
 using Wordfulness.Data;
 using Wordfulness.Models;
 
@@ -17,13 +17,14 @@ namespace Wordfulness.Controllers
 
 		public IActionResult Index()
 		{
-			var courses = _context.Courses.ToList();
+			List<Course> courses = _context.Courses.ToList();
+
 			return View(new CoursesIndexViewModel { Courses = courses });
 		}
 
 		public async Task<IActionResult> Details(int? id)
 		{
-			var course = await _context.Courses.FirstOrDefaultAsync(course => course.Id == id);
+			Course? course = await _context.Courses.FirstOrDefaultAsync(course => course.Id == id);
 
 			if (course == null)
 			{
@@ -35,7 +36,7 @@ namespace Wordfulness.Controllers
 
 		public async Task<IActionResult> Delete(int? id)
 		{
-			var course = await _context.Courses.FirstOrDefaultAsync(course => course.Id == id);
+			Course? course = await _context.Courses.FirstOrDefaultAsync(course => course.Id == id);
 
 			if (course == null)
 			{
@@ -45,18 +46,19 @@ namespace Wordfulness.Controllers
 			return View(course);
 		}
 
-		[HttpPost, ActionName("Delete")]
+		[HttpPost]
+		[ActionName("Delete")]
 		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> DeleteConfirmed(int id)
 		{
-			var course = await _context.Courses.FindAsync(id);
+			Course? course = await _context.Courses.FindAsync(id);
 
 			if (course == null)
 			{
 				return NotFound();
 			}
 
-			 _context.Courses.Remove(course);
+			_context.Courses.Remove(course);
 			await _context.SaveChangesAsync();
 
 			return RedirectToAction(nameof(Index));
