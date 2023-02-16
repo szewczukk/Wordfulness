@@ -4,21 +4,12 @@ using Wordfulness.Models;
 
 namespace Wordfulness.Controllers
 {
-	public class HomeController : Controller
+	public class CoursesController : Controller
 	{
-		private readonly ILogger<HomeController> _logger;
 
-		public HomeController(ILogger<HomeController> logger)
-		{
-			_logger = logger;
-		}
+		public CoursesController() { }
 
 		public IActionResult Index()
-		{
-			return View();
-		}
-
-		public IActionResult Privacy()
 		{
 			return View();
 		}
