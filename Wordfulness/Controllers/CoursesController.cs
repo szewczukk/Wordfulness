@@ -18,7 +18,7 @@ namespace Wordfulness.Controllers
 		public IActionResult Index()
 		{
 			var courses = _context.Courses.ToList();
-			return View(new AllCoursesViewModel { Courses = courses });
+			return View(new CoursesIndexViewModel { Courses = courses });
 		}
 
 		public async Task<IActionResult> Details(int? id)
@@ -30,7 +30,7 @@ namespace Wordfulness.Controllers
 				return NotFound();
 			}
 
-			return View(new SingleCourseViewModel { Course = course });
+			return View(new CoursesDetailsViewModel { Course = course });
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

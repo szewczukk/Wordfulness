@@ -1,6 +1,6 @@
 ﻿namespace Wordfulness.Models
 {
-	public class SingleCourseViewModel
+	public class CoursesDetailsViewModel
 	{
 		public Course Course { get; set; }
 	}
