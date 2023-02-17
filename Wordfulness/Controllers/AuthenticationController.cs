@@ -66,5 +66,11 @@ namespace Wordfulness.Controllers
 
 			return RedirectToAction("Index", "Courses");
 		}
+
+		public async Task<IActionResult> Logout()
+		{
+			await _signInManager.SignOutAsync();
+			return RedirectToAction("Index", "Courses");
+		}
 	}
 }

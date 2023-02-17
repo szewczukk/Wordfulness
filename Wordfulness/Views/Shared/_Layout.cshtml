@@ -22,13 +22,13 @@
                     <li class="nav-item">
                         <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Authentication" asp-action="Login">
-                            Login
-                        </a>
-                    </li>
                     @if (!User.Identity!.IsAuthenticated)
                     {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Authentication" asp-action="Login">
+                                Login
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Authentication" asp-action="Register">
                                 Register
@@ -41,8 +41,8 @@
                             Hi, @User.Identity.Name
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Authentication" asp-action="Register">
-                                Register
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Authentication" asp-action="Logout">
+                                Logout
                             </a>
                         </li>
                     }
