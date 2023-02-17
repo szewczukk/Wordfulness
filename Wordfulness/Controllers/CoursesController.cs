@@ -9,12 +9,10 @@ namespace Wordfulness.Controllers
 	public class CoursesController : Controller
 	{
 		private readonly ApplicationDbContext _context;
-		private readonly ILogger _logger;
 
-		public CoursesController(ApplicationDbContext context, ILogger<CoursesController> logger)
+		public CoursesController(ApplicationDbContext context)
 		{
 			_context = context;
-			_logger = logger;
 		}
 
 		public IActionResult Index()
@@ -83,6 +81,32 @@ namespace Wordfulness.Controllers
 			_context.Courses.Add(course);
 			await _context.SaveChangesAsync();
 			return RedirectToAction(nameof(Index));
+		}
+
+		public async Task<IActionResult> Edit(int? id)
+		{
+			Course? course = await _context.Courses.FirstOrDefaultAsync(course => course.Id == id);
+
+			if (course == null)
+			{
+				return NotFound();
+			}
+
+			return View(course);
+		}
+
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> Edit(Course course)
+		{
+			if (!ModelState.IsValid)
+			{
+				return View(course);
+			}
+
+			_context.Courses.Update(course);
+			await _context.SaveChangesAsync();
+			return RedirectToAction(nameof(Details), new { id = course.Id });
 		}
 
 		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
