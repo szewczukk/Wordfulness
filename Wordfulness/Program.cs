@@ -12,7 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services
-	.AddIdentity<User, IdentityRole>(options =>
+	.AddIdentity<User, IdentityRole<int>>(options =>
 	{
 		options.SignIn.RequireConfirmedAccount = true;
 		options.Password.RequireDigit = false;
