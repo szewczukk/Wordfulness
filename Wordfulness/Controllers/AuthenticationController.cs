@@ -37,5 +37,34 @@ namespace Wordfulness.Controllers
 
 			return RedirectToAction("Index", "Courses");
 		}
+
+		public IActionResult Login()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		[ActionName("Login")]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> SubmitLogin(CredentialsViewModel credentials)
+		{
+			User? user = await _userManager.FindByNameAsync(credentials.Username);
+
+			if (user == null)
+			{
+				return NotFound();
+			}
+
+			bool valid = await _userManager.CheckPasswordAsync(user, credentials.Password);
+
+			if (!valid)
+			{
+				return Unauthorized();
+			}
+
+			await _signInManager.SignInAsync(user, false);
+
+			return RedirectToAction("Index", "Courses");
+		}
 	}
 }
