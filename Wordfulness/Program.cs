@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Wordfulness.Data;
 using Wordfulness.Models;
@@ -10,8 +11,17 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 	options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
-	.AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services
+	.AddIdentity<User, IdentityRole>(options =>
+	{
+		options.SignIn.RequireConfirmedAccount = true;
+		options.Password.RequireDigit = false;
+		options.Password.RequireUppercase = false;
+		options.Password.RequireNonAlphanumeric = false;
+		options.Password.RequiredLength = 1;
+	})
+	.AddEntityFrameworkStores<ApplicationDbContext>()
+	.AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
 
 WebApplication app = builder.Build();
