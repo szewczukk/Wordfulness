@@ -19,7 +19,7 @@ namespace Wordfulness.Controllers
 		{
 			List<Course> courses = _context.Courses.ToList();
 
-			return View(new CoursesIndexViewModel { Courses = courses });
+			return View(courses);
 		}
 
 		public async Task<IActionResult> Details(int? id)
@@ -31,7 +31,7 @@ namespace Wordfulness.Controllers
 				return NotFound();
 			}
 
-			return View(new CoursesDetailsViewModel { Course = course });
+			return View(course);
 		}
 
 		public async Task<IActionResult> Delete(int? id)

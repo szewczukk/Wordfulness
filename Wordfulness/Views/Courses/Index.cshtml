@@ -1,10 +1,10 @@
-﻿@model CoursesIndexViewModel
+﻿@model IEnumerable<Course>
 @{
     ViewData["Title"] = "Home Page";
 }
 
 <ul>
-    @foreach (var course in Model.Courses)
+    @foreach (var course in Model)
     {
         <li>
             <a asp-action="Details" asp-route-id="@course.Id">
