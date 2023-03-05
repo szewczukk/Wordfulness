@@ -13,5 +13,7 @@ namespace Wordfulness.Data
 		}
 
 		public DbSet<Course> Courses { get; set; }
+
+		public DbSet<Lesson> Lessons { get; set; }
 	}
 }
