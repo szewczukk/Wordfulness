@@ -13,7 +13,7 @@ namespace Wordfulness.Models
 		[MinLength(1)]
 		public string Back { get; set; }
 
-		[ForeignKey("CourseId")]
+		[ForeignKey("LessonId")]
 		public Lesson Lesson { get; set; }
 
 		public int LessonId { get; set; }
