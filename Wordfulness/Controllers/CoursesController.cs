@@ -17,7 +17,7 @@ namespace Wordfulness.Controllers
 		// GET: Courses
 		public async Task<IActionResult> Index()
 		{
-			return View(await _context.Courses.ToListAsync());
+			return View(await _context.Courses.Include("Lessons").ToListAsync());
 		}
 
 		// GET: Courses/Details/5

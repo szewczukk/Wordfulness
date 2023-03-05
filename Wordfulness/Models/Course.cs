@@ -8,5 +8,7 @@ namespace Wordfulness.Models
 
 		[MinLength(1)]
 		public string Name { get; set; }
+
+		public virtual ICollection<Lesson> Lessons { get; set; }
 	}
 }
