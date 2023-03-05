@@ -1,4 +1,4 @@
-namespace Wordfulness.Models
+namespace Wordfulness.ViewModels
 {
 	public class ErrorViewModel
 	{
