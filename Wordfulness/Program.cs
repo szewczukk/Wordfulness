@@ -49,5 +49,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
 	"default",
 	"{controller=Courses}/{action=Index}/{id?}");
+ApplicationDbInitializer.Seed(app);
 
 app.Run();
