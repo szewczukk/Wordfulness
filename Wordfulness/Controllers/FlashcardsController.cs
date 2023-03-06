@@ -19,7 +19,7 @@ namespace Wordfulness.Controllers
 		// GET: Flashcards
 		public async Task<IActionResult> Index()
 		{
-			return View(await _context.Flashcard.ToListAsync());
+			return View(await _context.Flashcard.Include("Lesson").ToListAsync());
 		}
 
 		// GET: Flashcards/Details/5
