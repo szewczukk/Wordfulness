@@ -29,6 +29,7 @@ namespace Wordfulness.Controllers
 			}
 
 			var course = await _context.Courses
+				.Include("Lessons")
 				.FirstOrDefaultAsync(m => m.Id == id);
 			if (course == null)
 			{

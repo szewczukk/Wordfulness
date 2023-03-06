@@ -33,6 +33,7 @@ namespace Wordfulness.Controllers
 
 			var lesson = await _context.Lessons
 				.Include(l => l.Course)
+				.Include(l => l.Flashcards)
 				.FirstOrDefaultAsync(m => m.Id == id);
 			if (lesson == null)
 			{

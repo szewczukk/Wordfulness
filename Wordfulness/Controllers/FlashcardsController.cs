@@ -31,6 +31,7 @@ namespace Wordfulness.Controllers
 			}
 
 			var flashcard = await _context.Flashcard
+				.Include(f => f.Lesson)
 				.FirstOrDefaultAsync(m => m.Id == id);
 			if (flashcard == null)
 			{
