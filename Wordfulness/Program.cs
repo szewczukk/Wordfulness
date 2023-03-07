@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Wordfulness.Data;
 using Wordfulness.Models;
+using Wordfulness.Services;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
 	options.LoginPath = new PathString("/Authentication/Login");
 });
+builder.Services.AddScoped<ICoursesService, CoursesService>();
 
 WebApplication app = builder.Build();
 
