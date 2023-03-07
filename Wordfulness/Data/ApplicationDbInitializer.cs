@@ -1,14 +1,15 @@
-﻿using Wordfulness.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using Wordfulness.Models;
 
 namespace Wordfulness.Data
 {
 	public class ApplicationDbInitializer
 	{
-		public static void Seed(IApplicationBuilder applicationBuilder)
+		public async static Task Seed(IApplicationBuilder applicationBuilder)
 		{
 			using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
 			{
-				var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+				var context = serviceScope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
 				context.Database.EnsureCreated();
 
@@ -84,6 +85,41 @@ namespace Wordfulness.Data
 					});
 
 					context.SaveChanges();
+				}
+
+				var userManager = serviceScope.ServiceProvider.GetRequiredService<UserManager<User>>();
+				var roleManager = serviceScope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
+
+				if (!await roleManager.RoleExistsAsync("ADMIN"))
+				{
+					await roleManager.CreateAsync(new IdentityRole<int>("ADMIN"));
+				}
+
+				if (!await roleManager.RoleExistsAsync("USER"))
+				{
+					await roleManager.CreateAsync(new IdentityRole<int>("USER"));
+				}
+
+				var admin = await userManager.FindByNameAsync("admin");
+				if (admin == null)
+				{
+					var adminUser = new User()
+					{
+						UserName = "admin",
+					};
+					await userManager.CreateAsync(adminUser, "admin");
+					await userManager.AddToRoleAsync(adminUser, "ADMIN");
+				}
+
+				var user = await userManager.FindByNameAsync("user");
+				if (user == null)
+				{
+					var userUser = new User()
+					{
+						UserName = "user",
+					};
+					await userManager.CreateAsync(userUser, "user");
+					await userManager.AddToRoleAsync(userUser, "USER");
 				}
 			}
 		}
