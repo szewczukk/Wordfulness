@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Wordfulness.Data;
@@ -7,6 +8,7 @@ using Wordfulness.ViewModels;
 
 namespace Wordfulness.Controllers
 {
+	[Authorize(Roles = "ADMIN")]
 	public class LessonsController : Controller
 	{
 		private readonly ApplicationDbContext _context;
@@ -17,6 +19,7 @@ namespace Wordfulness.Controllers
 		}
 
 		// GET: Lessons
+		[AllowAnonymous]
 		public async Task<IActionResult> Index()
 		{
 			var applicationDbContext = _context.Lessons.Include(l => l.Course);
@@ -24,6 +27,7 @@ namespace Wordfulness.Controllers
 		}
 
 		// GET: Lessons/Details/5
+		[AllowAnonymous]
 		public async Task<IActionResult> Details(int? id)
 		{
 			if (id == null || _context.Lessons == null)

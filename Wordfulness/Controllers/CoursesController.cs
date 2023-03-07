@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Wordfulness.Data;
 using Wordfulness.Models;
 
 namespace Wordfulness.Controllers
 {
+	[Authorize(Roles = "ADMIN")]
 	public class CoursesController : Controller
 	{
 		private readonly ApplicationDbContext _context;
@@ -15,12 +17,14 @@ namespace Wordfulness.Controllers
 		}
 
 		// GET: Courses
+		[AllowAnonymous]
 		public async Task<IActionResult> Index()
 		{
 			return View(await _context.Courses.Include("Lessons").ToListAsync());
 		}
 
 		// GET: Courses/Details/5
+		[AllowAnonymous]
 		public async Task<IActionResult> Details(int? id)
 		{
 			if (id == null || _context.Courses == null)

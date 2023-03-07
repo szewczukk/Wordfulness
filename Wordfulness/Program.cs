@@ -23,6 +23,10 @@ builder.Services
 	.AddEntityFrameworkStores<ApplicationDbContext>()
 	.AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+	options.LoginPath = new PathString("/Authentication/Login");
+});
 
 WebApplication app = builder.Build();
 
