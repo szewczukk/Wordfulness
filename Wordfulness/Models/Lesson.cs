@@ -13,6 +13,6 @@ namespace Wordfulness.Models
 
 		public int CourseId { get; set; }
 
-		public virtual ICollection<Flashcard> Flashcards { get; set; }
+		public virtual ICollection<Flashcard> Flashcards { get; set; } = new List<Flashcard>();
 	}
 }

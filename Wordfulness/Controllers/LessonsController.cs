@@ -86,7 +86,7 @@ namespace Wordfulness.Controllers
 				return NotFound();
 			}
 			ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Name", lesson.CourseId);
-			return View(lesson);
+			return View(new EditLessonViewModel() { Id = lesson.Id, Name = lesson.Name, CourseId = lesson.CourseId });
 		}
 
 		// POST: Lessons/Edit/5
@@ -94,7 +94,7 @@ namespace Wordfulness.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, Lesson lesson)
+		public async Task<IActionResult> Edit(int id, EditLessonViewModel lesson)
 		{
 			if (id != lesson.Id)
 			{
@@ -105,7 +105,12 @@ namespace Wordfulness.Controllers
 			{
 				try
 				{
-					_context.Update(lesson);
+					_context.Lessons.Update(new Lesson()
+					{
+						Id = lesson.Id,
+						CourseId = lesson.CourseId,
+						Name = lesson.Name
+					});
 					await _context.SaveChangesAsync();
 				}
 				catch (DbUpdateConcurrencyException)
@@ -121,6 +126,10 @@ namespace Wordfulness.Controllers
 				}
 				return RedirectToAction(nameof(Index));
 			}
+			var errors = ModelState.Select(x => x.Value.Errors)
+						   .Where(y => y.Count > 0)
+						   .ToList();
+
 			ViewData["CourseId"] = new SelectList(_context.Courses, "Id", "Name", lesson.CourseId);
 			return View(lesson);
 		}
