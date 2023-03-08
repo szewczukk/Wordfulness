@@ -87,7 +87,13 @@ namespace Wordfulness.Controllers
 			{
 				return NotFound();
 			}
-			return View(flashcard);
+			return View(new EditFlashcardViewModel()
+			{
+				Id = flashcard.Id,
+				Front = flashcard.Front,
+				Back = flashcard.Back,
+				LessonId = flashcard.LessonId
+			});
 		}
 
 		// POST: Flashcards/Edit/5
@@ -95,7 +101,7 @@ namespace Wordfulness.Controllers
 		// For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
 		[HttpPost]
 		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Edit(int id, [Bind("Id,Front,Back,LessonId")] Flashcard flashcard)
+		public async Task<IActionResult> Edit(int id, EditFlashcardViewModel flashcard)
 		{
 			if (id != flashcard.Id)
 			{
@@ -106,7 +112,13 @@ namespace Wordfulness.Controllers
 			{
 				try
 				{
-					_context.Update(flashcard);
+					_context.Flashcard.Update(new Flashcard()
+					{
+						Id = flashcard.Id,
+						Front = flashcard.Front,
+						Back = flashcard.Back,
+						LessonId = flashcard.LessonId
+					});
 					await _context.SaveChangesAsync();
 				}
 				catch (DbUpdateConcurrencyException)
