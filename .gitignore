@@ -362,6 +362,6 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-Wordfulness/database.sqlite
 .idea
 .vscode
+Wordfulness/database.*
