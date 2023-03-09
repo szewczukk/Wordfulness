@@ -5,9 +5,14 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Wordfulness", "Wordfulness\Wordfulness.csproj", "{4108AAF6-C768-4183-A374-480A22C0CCE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordfulnessTests", "WordfulnessTests\WordfulnessTests.csproj", "{63441BF4-AD4F-410C-9781-7D814A113637}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WordfulnessTests", "WordfulnessTests\WordfulnessTests.csproj", "{63441BF4-AD4F-410C-9781-7D814A113637}"
 	ProjectSection(ProjectDependencies) = postProject
 		{4108AAF6-C768-4183-A374-480A22C0CCE0} = {4108AAF6-C768-4183-A374-480A22C0CCE0}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CEDF946A-F877-43D6-B0D0-0561F6817E21}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
 	EndProjectSection
 EndProject
 Global
