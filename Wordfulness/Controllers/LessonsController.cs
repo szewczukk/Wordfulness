@@ -19,7 +19,6 @@ namespace Wordfulness.Controllers
 		}
 
 		// GET: Lessons
-		[AllowAnonymous]
 		public async Task<IActionResult> Index()
 		{
 			var applicationDbContext = _context.Lessons.Include(l => l.Course);
@@ -27,7 +26,6 @@ namespace Wordfulness.Controllers
 		}
 
 		// GET: Lessons/Details/5
-		[AllowAnonymous]
 		public async Task<IActionResult> Details(int? id)
 		{
 			if (id == null || _context.Lessons == null)

@@ -25,9 +25,16 @@
                 @foreach (var lesson in Model.Lessons)
                 {
                     <li>
-                        <a asp-controller="Lessons" asp-action="Details" asp-route-id="@lesson.Id">
-                            @lesson.Name
-                        </a>
+                        @if (User.IsInRole("ADMIN"))
+                        {
+                            <a asp-controller="Lessons" asp-action="Details" asp-route-id="@lesson.Id">
+                                @Html.DisplayFor(modelItem => lesson.Name)
+                            </a>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => lesson.Name)
+                        }
                     </li>
                 }
             </ul>

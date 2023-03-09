@@ -19,14 +19,12 @@ namespace Wordfulness.Controllers
 		}
 
 		// GET: Flashcards
-		[AllowAnonymous]
 		public async Task<IActionResult> Index()
 		{
 			return View(await _context.Flashcard.Include("Lesson").ToListAsync());
 		}
 
 		// GET: Flashcards/Details/5
-		[AllowAnonymous]
 		public async Task<IActionResult> Details(int? id)
 		{
 			if (id == null || _context.Flashcard == null)
