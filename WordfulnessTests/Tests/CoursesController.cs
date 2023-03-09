@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Wordfulness.Controllers;
 using Wordfulness.Models;
 using Wordfulness.Services;
+using Wordfulness.ViewModels;
 using WordfulnessTests.Services;
 
 namespace WordfulnessTests.Tests
@@ -63,6 +64,58 @@ namespace WordfulnessTests.Tests
             var actionResult = Assert.IsType<RedirectToActionResult>(result);
             Assert.Equal("Index", actionResult.ActionName);
             Assert.Equal("Fancy course", course.Name);
+        }
+
+        [Fact]
+        public void Create_ReturnsAViewResult()
+        {
+            var coursesService = CreateTestCoursesService();
+            var controller = new CoursesController(coursesService);
+
+            var result = controller.Create();
+
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public async Task Create_ReturnsARedirect_And_CreatesANewCourse()
+        {
+            var coursesService = CreateTestCoursesService();
+            var controller = new CoursesController(coursesService);
+
+            var result = await controller.Create(new CourseViewModel()
+            {
+                Name = "Course 4"
+            });
+            var course = await coursesService.GetCourseWithLesson(3);
+
+            var actionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Index", actionResult.ActionName);
+            Assert.Equal("Course 4", course.Name);
+        }
+
+        [Fact]
+        public async Task Delete_ReturnsAViewResult()
+        {
+            var coursesService = CreateTestCoursesService();
+            var controller = new CoursesController(coursesService);
+
+            var result = await controller.Delete(2);
+
+            Assert.IsType<ViewResult>(result);
+        }
+
+        [Fact]
+        public async Task DeleteConfirmed_ReturnsARedirect_And_DeletesANewCourse()
+        {
+            var coursesService = CreateTestCoursesService();
+            var controller = new CoursesController(coursesService);
+
+            var result = await controller.DeleteConfirmed(2);
+
+            var actionResult = Assert.IsType<RedirectToActionResult>(result);
+            Assert.Equal("Index", actionResult.ActionName);
+            await Assert.ThrowsAsync<KeyNotFoundException>(() => coursesService.GetCourseWithLesson(2));
         }
     }
 }
