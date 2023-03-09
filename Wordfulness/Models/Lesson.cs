@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Wordfulness.Models
 {
@@ -9,6 +10,7 @@ namespace Wordfulness.Models
 		public string Name { get; set; }
 
 		[ForeignKey("CourseId")]
+		[Display(Name = "Course")]
 		public Course Course { get; set; }
 
 		public int CourseId { get; set; }

@@ -14,6 +14,7 @@ namespace Wordfulness.Models
 		public string Back { get; set; }
 
 		[ForeignKey("LessonId")]
+		[Display(Name = "Lesson")]
 		public Lesson Lesson { get; set; }
 
 		public int LessonId { get; set; }
