@@ -111,9 +111,6 @@ namespace Wordfulness.Controllers
 				}
 				return RedirectToAction(nameof(Index));
 			}
-			var message = string.Join(" | ", ModelState.Values
-		.SelectMany(v => v.Errors)
-		.Select(e => e.ErrorMessage));
 			return View(course);
 		}
 
